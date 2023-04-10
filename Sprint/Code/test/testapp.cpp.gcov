@@ -1,0 +1,76 @@
+        -:    0:Source:testapp.cpp
+        -:    0:Graph:./testapp.gcno
+        -:    0:Data:./testapp.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include "../inc/binary.h"
+        -:    2:#include <iostream>
+        -:    3:#include <string>
+        -:    4:#include <cstdlib>
+        -:    5:#include <cmath>
+        -:    6:
+        -:    7:
+        -:    8:
+        -:    9:using namespace std;
+        -:   10:using namespace binary;
+        -:   11:
+        -:   12:
+        1:   13:int main()
+        -:   14:{
+        -:   15:
+        2:   16:    Binary algo;
+        -:   17:
+        1:   18:    bool start  = true;
+        7:   19:    while(start)
+        -:   20:    {
+        -:   21:        int a;
+        3:   22:        cout <<"\n Press: [1] Allocate  [2] Deallocate  [3] Exit -> ";
+        3:   23:        cin >> a;
+        3:   24:        var value = 0;
+        3:   25:        switch (a)
+        -:   26:        {
+        1:   27:        case 1:
+        1:   28:            cout <<"\n Enter the amount of memory to allocate (= Block Value): ";
+        1:   29:            cin >> value;
+        1:   30:            if(value == 0)
+        -:   31:            {
+    #####:   32:                cout <<"\n Error: Zero(0) cannot be allocated"<< endl;
+    #####:   33:		start = false;
+    #####:   34:                break;
+        -:   35:            }
+        1:   36:            if(!algo.allocate(value))
+        -:   37:            {
+        -:   38:
+    #####:   39:                cout <<"\n Error: Memory insufficient or space is not available"<< endl;
+    #####:   40:		start = false;
+    #####:   41:                break;
+        -:   42:
+        -:   43:            }
+        1:   44:            cout <<"\n THE BLOCKS IN MEMORY\n" << endl;
+        1:   45:            algo. display();
+        1:   46:            break;
+        1:   47:        case 2:
+        1:   48:            cout <<"\n Enter the start address of block to deallocate (Start): ";
+        1:   49:            cin >> value;
+        1:   50:            if(!algo.deallocate(value))
+        -:   51:            {
+    #####:   52:                cout <<"\n Error: Block is not allocated at given address"<< endl;
+    #####:   53:		start = false;
+    #####:   54:                break;
+        -:   55:            }
+        1:   56:            cout <<"\n THE BLOCKS IN MEMORY\n" << endl;
+        1:   57:            algo.display();
+        1:   58:            break;
+        1:   59:        case 3:
+        1:   60:            cout <<"\n Program terminated\n"<< endl;
+        1:   61:            start = false;
+        1:   62:            break;
+        -:   63:
+    #####:   64:        default:
+    #####:   65:            cout <<"\n Error: Invalid input"<< endl;
+    #####:   66:	    start = false;
+        -:   67:        }
+        -:   68:    }
+        -:   69:
+        1:   70:    return 0;
+        3:   71:}
